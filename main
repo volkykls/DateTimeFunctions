@@ -1,0 +1,28 @@
+package com.dateTimeFunc;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.abaSteel.backEnd.implementations.ImpLogIn;
+
+@Component
+public class Main {
+
+	public static void main(String[] args) {		
+		System.out.println("1 :"+DateTimeFunc.saat());
+		
+		System.out.println("2 :"+DateTimeFunc.saat(new Date()));
+		
+		System.out.println("3 :"+DateTimeFunc.tarih());
+		
+		System.out.println("4 :"+DateTimeFunc.tarih(new Date()));
+		
+		System.out.println("5 :"+DateTimeFunc.tarihDdMmYyyyHhMmSs(new Date()));
+		
+		System.out.println("6 :"+DateTimeFunc.tarihVeSaat());
+		
+		System.out.println("7 :"+DateTimeFunc.tersZaman());		
+	}
+
+}
