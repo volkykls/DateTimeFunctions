@@ -17,7 +17,15 @@ public class Main {
 		
 		System.out.println("6 :"+DateTimeFunc.tarihVeSaat());
 		
-		System.out.println("7 :"+DateTimeFunc.tersZaman());		
+		System.out.println("7 :"+DateTimeFunc.tersZaman());	
+		
+		System.out.println("8 :"+OrtakMetodlar.tarihStrDdMmYyyySaDkSn(new Date()));
+		
+		System.out.println("9 :"+OrtakMetodlar.tarihDdMmYyyy235959(new Date()));
+		
+		System.out.println("10 :"+OrtakMetodlar.tarihMmYyyy(new Date()));
+		
+		System.out.println("11 :"+OrtakMetodlar.zamanlarArasi("01.02.2020 03:04:05", "06.07.2021 08:09:10"));
 	}
 
 }
