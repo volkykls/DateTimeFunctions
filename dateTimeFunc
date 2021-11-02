@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Objects;
+import java.text.ParseException;
 
 public class DateTimeFunc {
 	
@@ -56,4 +58,65 @@ public class DateTimeFunc {
 		return guncelTarih;
 	}
 	
+	public static Date tarihDdMmYyyy235959(Date gelenTarih) throws ParseException {
+		Locale locale = new Locale("tr", "TR");
+		SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy", locale);
+		SimpleDateFormat sdfDayAndTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		String guncelTarih = sdfDay.format(gelenTarih) + " 23:59:59";
+		Date gidenTarih = sdfDayAndTime.parse(guncelTarih);
+		return gidenTarih;
+	}
+
+	public static String tarihStrDdMmYyyySaDkSn(Date gelenTarih) throws ParseException {
+		Locale locale = new Locale("tr", "TR");
+		SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", locale);
+		String guncelTarih = sdfDay.format(gelenTarih);
+		return guncelTarih;
+	}
+	
+	public static String tersZaman() {
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmss");
+		Calendar cal = Calendar.getInstance();
+		TimeZone timeZone = cal.getTimeZone();
+		sdf.setTimeZone(timeZone);
+		return sdf.format(new Date());
+	}
+	
+	public static String zamanlarArasi(String start_date, String end_date) {
+		String sonuc = "";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		
+		try {
+          Date d1 = simpleDateFormat.parse(start_date);
+          Date d2 = simpleDateFormat.parse(end_date);
+
+          //Milisaniye cinsinden farkı hesaplama
+          long zaman_farki  = d2.getTime() - d1.getTime();
+
+          long yil_farki    = (zaman_farki  / (1000l * 60 * 60 * 24 * 365));
+          if (!Objects.equals(yil_farki, Sabitler.sifirLong)) {
+        	  sonuc += yil_farki + " yıl ";
+          }
+          long gun_farki    = (zaman_farki  / (1000 * 60 * 60 * 24))  % 365;
+          if (!Objects.equals(gun_farki, Sabitler.sifirLong)) {
+        	  sonuc += gun_farki + " gün ";
+          }
+          long saat_farki   = (zaman_farki / (1000 * 60 * 60))  % 24;
+          if (!Objects.equals(saat_farki, Sabitler.sifirLong)) {
+        	  sonuc += saat_farki + " saat ";
+          }
+          long dakika_farki = (zaman_farki  / (1000 * 60)) % 60;
+          if (!Objects.equals(dakika_farki, Sabitler.sifirLong)) {
+        	  sonuc += dakika_farki + " dakika ";
+          }
+          long saniye_farki = (zaman_farki / 1000)  % 60;
+          if (!Objects.equals(saniye_farki, Sabitler.sifirLong)) {
+        	  sonuc += saniye_farki + " saniye ";
+          }
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return sonuc;
+    }
 }
